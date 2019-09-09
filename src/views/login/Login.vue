@@ -49,6 +49,7 @@
 <script lang="ts">
 import { Component, Vue, Provide } from "vue-property-decorator";
 import LoginHeader from "@/components/LoginHeader.vue";
+import { State, Action, Mutation, Getter } from "vuex-class";
 
 @Component({
   components: {
@@ -56,7 +57,8 @@ import LoginHeader from "@/components/LoginHeader.vue";
   }
 })
 export default class Login extends Vue {
-@Provide() isLogin:boolean = false;
+    @Action('setUser') setUser:any;
+  @Provide() isLogin: boolean = false;
   @Provide() ruleForm: {
     username: String;
     pwd: String;
@@ -72,26 +74,28 @@ export default class Login extends Vue {
     pwd: [{ required: true, message: "请输入密码", trigger: "blur" }]
   };
 
-    handleSubmit():void {
-        (this.$refs['ruleForm'] as any).validate((value:boolean)=>{
-            if(value) {
-                // console.log("校验通过");
-                this.isLogin = true;
-            (this as any).$axios.post('/api/users/login',this.ruleForm).then((res:any)=>{
-                this.isLogin = false;
-                // console.log(res);
-                localStorage.setItem('istoken',res.data.token)
-                this.$router.push('/')
-            })
-            }else {
-                this.isLogin = false;
-                console.log("失败")
-            }   
-        })
-    }
-}
-    
+  handleSubmit(): void {
+    (this.$refs["ruleForm"] as any).validate((value: boolean) => {
+      if (value) {
+        // console.log("校验通过");
+        this.isLogin = true;
+        (this as any).$axios
+          .post("/api/users/login", this.ruleForm)
+          .then((res: any) => {
+            this.isLogin = false;
+            
+            localStorage.setItem("istoken", res.data.token);
+            this.setUser(res.data.token);
 
+            this.$router.push("/");
+          });
+      } else {
+        this.isLogin = false;
+        console.log("失败");
+      }
+    });
+  }
+}
 </script>
 
 <style  lang="scss" scoped>
