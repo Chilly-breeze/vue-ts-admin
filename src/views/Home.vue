@@ -17,8 +17,7 @@ export default class Home extends Vue {
   learn(): void {
     // 新窗口打开
     window.open(
-      "https://ke.qq.com/course/list/%E7%B1%B3%E6%96%AF%E7%89%B9%E5%90%B4?tuin=c9304a42",
-      "_blank"
+     "https://github.com/Chilly-breeze/vue-ts-admin"
     );
   }
 }
