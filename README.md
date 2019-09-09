@@ -1,5 +1,10 @@
 # vue-ts-admin
 
+## 账号密码
+```
+账号:admin
+密码123456
+```
 ## Project setup
 ```
 npm install
