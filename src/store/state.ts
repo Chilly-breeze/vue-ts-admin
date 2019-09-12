@@ -4,4 +4,3 @@ const state:any = {
     routers: asyncRouterMap
 }
 export default state
-

@@ -10,4 +10,3 @@ const getter:GetterTree<any,any> = {
     }
 }
 export default getter
-
